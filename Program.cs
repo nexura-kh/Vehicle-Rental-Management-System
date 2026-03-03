@@ -1,3 +1,5 @@
+using Vehicle_Rental_Management_System.Forms;
+
 namespace Vehicle_Rental_Management_System
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace Vehicle_Rental_Management_System
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            Application.Run(new Layout());
         }
     }
 }
