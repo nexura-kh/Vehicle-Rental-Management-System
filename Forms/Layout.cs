@@ -58,5 +58,15 @@ namespace Vehicle_Rental_Management_System.Forms
         {
             Close();
         }
+
+        private void btnBooking_Click(object sender, EventArgs e)
+        {
+            LoadFeature(new BookingManagementService());
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            LoadFeature(new PaymentManagementService());
+        }
     }
 }

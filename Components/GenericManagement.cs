@@ -17,7 +17,7 @@ namespace Vehicle_Rental_Management_System.Components
         public GenericManagement()
         {
             InitializeComponent();
-            dgvData.AutoGenerateColumns = false;
+            dgvData.AutoGenerateColumns = false; 
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvData.MultiSelect = false;
         }

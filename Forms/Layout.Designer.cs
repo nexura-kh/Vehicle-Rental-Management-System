@@ -120,6 +120,7 @@
             btnPayment.TabIndex = 3;
             btnPayment.Text = "   PAYMENT";
             btnPayment.UseVisualStyleBackColor = true;
+            btnPayment.Click += btnPayment_Click;
             // 
             // btnBooking
             // 
@@ -137,6 +138,7 @@
             btnBooking.TabIndex = 2;
             btnBooking.Text = "    BOOKING";
             btnBooking.UseVisualStyleBackColor = true;
+            btnBooking.Click += btnBooking_Click;
             // 
             // btnVehicle
             // 
