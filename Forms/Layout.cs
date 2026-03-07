@@ -52,6 +52,8 @@ namespace Vehicle_Rental_Management_System.Forms
         private void btnVehicle_Click(object sender, EventArgs e)
         {
             LoadFeature(new VehicleManagementService());
+
+            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
