@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using Vehicle_Rental_Management_System.Interfaces;
 using Vehicle_Rental_Management_System.Helpers;
 using System.Data;
+using Vehicle_Rental_Management_System.Repositories;
 
 namespace Vehicle_Rental_Management_System.Components
 {
     public class CustomerManagementService : IManagementService
     {
+
+        CustomerRepository customerRepository=new CustomerRepository();
+
         public string Title => "Customer Management";
 
         public List<ColumnDefinition> GetColumns()
@@ -36,20 +40,11 @@ namespace Vehicle_Rental_Management_System.Components
             table.Columns.Add("Nationality", typeof(string));
             table.Columns.Add("phone", typeof(string));
 
-            string[] firstNames = { "John", "Jane", "Michael", "Sarah", "David", "Emma", "Chris", "Sophia", "Daniel", "Olivia" };
-            string[] lastNames = { "Smith", "Johnson", "Brown", "Williams", "Jones", "Garcia", "Miller", "Davis", "Wilson", "Taylor" };
-            string[] nationalities = { "Cambodian", "American", "French", "Japanese", "Korean", "Thai", "Vietnamese", "Chinese", "Australian", "Canadian" };
+            customerRepository.customerInit();
 
-            Random rand = new Random();
-
-            for (int i = 1; i <= 100; i++)
+            foreach (var customer in customerRepository.customers )
             {
-                string firstName = firstNames[rand.Next(firstNames.Length)];
-                string lastName = lastNames[rand.Next(lastNames.Length)];
-                string nationality = nationalities[rand.Next(nationalities.Length)];
-                string phone = "0" + rand.Next(10000000, 99999999).ToString();
-
-                table.Rows.Add(i, firstName, lastName, nationality, phone);
+                table.Rows.Add(customer.Id,customer.FirstName,customer.LastName,customer.Nationality,customer.PhoneNumber);
             }
 
             return table;

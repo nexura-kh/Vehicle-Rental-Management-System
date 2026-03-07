@@ -8,10 +8,10 @@ using Vehicle_Rental_Management_System.Interfaces;
 
 namespace Vehicle_Rental_Management_System.Repositories
 {
-    internal class CarRepository
+    public class CarRepository
     {
 
-       List<IVehicle> vehicles=new List<IVehicle>();
+      public List<IVehicle> vehicles=new List<IVehicle>();
         
         public void CarInit()
         {
@@ -20,7 +20,9 @@ namespace Vehicle_Rental_Management_System.Repositories
                 "001",
                 "BMW",
                 "Truck",
-                "AVAILABLE"
+                "AVAILABLE",
+                12.00,
+                "good car to try"
                 );
 
 
@@ -29,7 +31,9 @@ namespace Vehicle_Rental_Management_System.Repositories
                 "002",
                 "Toyota",
                 "Van",
-                "LOCKED"
+                "LOCKED",
+                   12.00,
+                "good car to try"
 
 
                 );
@@ -40,7 +44,9 @@ namespace Vehicle_Rental_Management_System.Repositories
                 "003",
                 "Honda",
                 "Van",
-                "LOCKED"
+                "LOCKED",
+                   12.00,
+                "good car to try"
 
                 );
 

@@ -12,7 +12,7 @@ namespace Vehicle_Rental_Management_System.factories
 
         public abstract IVehicle CreateVehicle();
 
-        public IVehicle OrderVehicle(string id,string model,string type,string VehicleState)
+        public IVehicle OrderVehicle(string id,string model,string type,string VehicleState,double price,string description)
         {
             Console.WriteLine("Vehicle Order Revieved");
 
@@ -21,6 +21,8 @@ namespace Vehicle_Rental_Management_System.factories
             vehicle.model = model;
             vehicle.type = type;
             vehicle.VehicleState=VehicleState;
+            vehicle.price = price;
+            vehicle.description = description;
 
             vehicle.DisplayInfo();
 

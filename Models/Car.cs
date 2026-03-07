@@ -9,6 +9,11 @@ namespace Vehicle_Rental_Management_System.Models
        public string id { get; set; }
       public  string model { get; set; }
       public  string type { get; set; }
+
+        public double price { get; set; }
+
+        public string description { get; set; }
+
       public  string VehicleState { get; set; }
 
       public  void Start()

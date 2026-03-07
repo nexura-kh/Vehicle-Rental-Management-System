@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vehicle_Rental_Management_System.Interfaces
 {
-    internal interface IVehicle
+    public interface IVehicle
     {
      public   string id { get; set; }
      public   string model { get; set; }
@@ -14,8 +14,12 @@ namespace Vehicle_Rental_Management_System.Interfaces
 
      public   string VehicleState { get; set; }
 
+    public double price { get; set; }
 
-      public  void Start();
+    public string description { get; set; }
+
+
+        public  void Start();
       public  void Stop();
       public void DisplayInfo();
 
