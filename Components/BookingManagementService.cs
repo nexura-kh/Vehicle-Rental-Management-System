@@ -13,6 +13,12 @@ namespace Vehicle_Rental_Management_System.Components
     {
         public string Title => "Booking Management";
 
+        public bool CanAdd => true;
+
+        public bool CanEdit => true;
+
+        public bool CanDelete => true;
+
         public void DeleteRecord(object selectedId)
         {
             MessageBox.Show($"Delete Customer ID: {selectedId}");
@@ -59,6 +65,11 @@ namespace Vehicle_Rental_Management_System.Components
         }
 
         public void ShowAddDialog(IWin32Window owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowEditDialog(IWin32Window owner, object selectedId)
         {
             throw new NotImplementedException();
         }

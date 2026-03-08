@@ -13,7 +13,5 @@ namespace Vehicle_Rental_Management_System.Interfaces
         string LastName { get; set; }
         string Nationality { get; set; }
         string PhoneNumber { get; set; }
-
-
     }
 }

@@ -29,43 +29,33 @@ namespace Vehicle_Rental_Management_System.Forms
         private void LoadFeature(IManagementService service)
         {
             dynamicPanel.Controls.Clear();
-
             var control = new GenericManagement
             {
                 Dock = DockStyle.Fill
             };
-
             control.Configure(service);
             dynamicPanel.Controls.Add(control);
         }
-
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             LoadFeature(new CustomerManagementService());
         }
-
         private void btnLogo_Click(object sender, EventArgs e)
         {
             LoadDashboard();
         }
-
         private void btnVehicle_Click(object sender, EventArgs e)
         {
             LoadFeature(new VehicleManagementService());
-
-            
         }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void btnBooking_Click(object sender, EventArgs e)
         {
             LoadFeature(new BookingManagementService());
         }
-
         private void btnPayment_Click(object sender, EventArgs e)
         {
             LoadFeature(new PaymentManagementService());

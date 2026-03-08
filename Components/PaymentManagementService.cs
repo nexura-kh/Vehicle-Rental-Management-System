@@ -11,6 +11,12 @@ namespace Vehicle_Rental_Management_System.Components
     {
         public string Title => "Payment Management";
 
+        public bool CanAdd => false;
+
+        public bool CanEdit => true;
+
+        public bool CanDelete => true;
+
         public void DeleteRecord(object selectedId)
         {
             if (selectedId == null)
@@ -63,6 +69,11 @@ namespace Vehicle_Rental_Management_System.Components
         public void ShowAddDialog(IWin32Window owner)
         {
             MessageBox.Show(owner, "Show Add Payment Dialog here.");
+        }
+
+        public void ShowEditDialog(IWin32Window owner, object selectedId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

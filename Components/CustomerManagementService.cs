@@ -17,6 +17,12 @@ namespace Vehicle_Rental_Management_System.Components
 
         public string Title => "Customer Management";
 
+        public bool CanAdd => false;
+
+        public bool CanEdit => false;
+
+        public bool CanDelete => false;
+
         public List<ColumnDefinition> GetColumns()
         {
             return new List<ColumnDefinition>
@@ -57,6 +63,11 @@ namespace Vehicle_Rental_Management_System.Components
         public void DeleteRecord(object selectedId)
         {
             MessageBox.Show($"Delete Customer ID: {selectedId}");
+        }
+
+        public void ShowEditDialog(IWin32Window owner, object selectedId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

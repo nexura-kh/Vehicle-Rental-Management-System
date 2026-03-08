@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenericManagement));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
             btnDelete = new Button();
@@ -96,6 +98,7 @@
             btnDelete.TabIndex = 3;
             btnDelete.Text = "    Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnEdit
             // 
@@ -114,6 +117,7 @@
             btnEdit.TabIndex = 2;
             btnEdit.Text = "    Edit";
             btnEdit.UseVisualStyleBackColor = false;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
@@ -132,6 +136,7 @@
             btnAdd.TabIndex = 1;
             btnAdd.Text = "    Add";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // lblTitle
             // 
@@ -158,52 +163,45 @@
             // 
             // dgvData
             // 
-            // ===== GENERAL =====
-            dgvData.Dock = DockStyle.Fill;
-            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvData.BackgroundColor = Color.FromArgb(249, 250, 251); // softer light gray
-            dgvData.BorderStyle = BorderStyle.None;
-            dgvData.EnableHeadersVisualStyles = false;
-            dgvData.RowHeadersVisible = false;
             dgvData.AllowUserToAddRows = false;
             dgvData.AllowUserToResizeRows = false;
-            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvData.MultiSelect = false;
-
-            // ===== HEADER STYLE =====
-            DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
-            headerStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            headerStyle.BackColor = Color.FromArgb(20, 184, 166); // Teal
-            headerStyle.ForeColor = Color.White;
-            headerStyle.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            headerStyle.SelectionBackColor = Color.FromArgb(20, 184, 166); // prevent blue
-            headerStyle.SelectionForeColor = Color.White;
-            headerStyle.WrapMode = DataGridViewTriState.True;
-
-            dgvData.ColumnHeadersDefaultCellStyle = headerStyle;
-            dgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvData.ColumnHeadersHeight = 48;
-
-            // ===== ROW STYLE =====
-            DataGridViewCellStyle rowStyle = new DataGridViewCellStyle();
-            rowStyle.BackColor = Color.White;
-            rowStyle.ForeColor = Color.FromArgb(31, 41, 55); // dark text
-            rowStyle.Font = new Font("Segoe UI", 10F);
-            rowStyle.SelectionBackColor = Color.FromArgb(204, 251, 241); // soft teal
-            rowStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
-            rowStyle.Padding = new Padding(8, 0, 8, 0);
-
-            dgvData.DefaultCellStyle = rowStyle;
-
-            // ===== ALTERNATING ROWS =====
-            dgvData.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(243, 244, 246);
-
-            // ===== GRID STYLE =====
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(243, 244, 246);
+            dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvData.BackgroundColor = Color.FromArgb(249, 250, 251);
+            dgvData.BorderStyle = BorderStyle.None;
             dgvData.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(20, 184, 166);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(20, 184, 166);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvData.ColumnHeadersHeight = 48;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(31, 41, 55);
+            dataGridViewCellStyle3.Padding = new Padding(8, 0, 8, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(204, 251, 241);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvData.DefaultCellStyle = dataGridViewCellStyle3;
+            dgvData.Dock = DockStyle.Fill;
+            dgvData.EnableHeadersVisualStyles = false;
             dgvData.GridColor = Color.FromArgb(229, 231, 235);
-
-            // ===== ROW HEIGHT =====
+            dgvData.Location = new Point(0, 30);
+            dgvData.MultiSelect = false;
+            dgvData.Name = "dgvData";
+            dgvData.RowHeadersVisible = false;
+            dgvData.RowHeadersWidth = 51;
             dgvData.RowTemplate.Height = 38;
+            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvData.Size = new Size(1038, 305);
+            dgvData.TabIndex = 0;
             // 
             // GenericManagement
             // 

@@ -17,7 +17,7 @@ namespace Vehicle_Rental_Management_System.Components
         public GenericManagement()
         {
             InitializeComponent();
-            dgvData.AutoGenerateColumns = false; 
+            dgvData.AutoGenerateColumns = false;
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvData.MultiSelect = false;
         }
@@ -26,6 +26,10 @@ namespace Vehicle_Rental_Management_System.Components
             _service = service;
 
             lblTitle.Text = service.Title;
+
+            btnAdd.Visible = service.CanAdd;
+            btnEdit.Visible = service.CanEdit;
+            btnDelete.Visible = service.CanDelete;
 
             ConfigureColumns();
             LoadData();
@@ -65,5 +69,19 @@ namespace Vehicle_Rental_Management_System.Components
             _service.DeleteRecord(id);
             LoadData();
         }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvData.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a record.");
+                return;
+            }
+
+            var id = dgvData.SelectedRows[0].Cells[0].Value;
+
+            _service.ShowEditDialog(this, id);
+            LoadData();
+        }
+
     }
 }
