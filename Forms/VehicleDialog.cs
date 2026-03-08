@@ -13,7 +13,7 @@ namespace Vehicle_Rental_Management_System.Forms
             InitializeComponent();
 
             txtType.Items.AddRange(new string[] { "SUV", "Sedan", "Truck", "Van", "Motorbike", "E-Bike" });
-            txtStatus.Items.AddRange(new string[] { "Available", "Rented", "Maintenance" });
+            txtStatus.Items.AddRange(new Enum[] { VehicleStatus.Available, VehicleStatus.Rented, VehicleStatus.Maintenance });
 
             txtType.SelectedIndex = 0;
             txtStatus.SelectedIndex = 0;
@@ -25,14 +25,14 @@ namespace Vehicle_Rental_Management_System.Forms
                 txtName.Text = _vehicle.model;
                 txtType.Text = _vehicle.type;
                 txtPrice.Text = _vehicle.price.ToString();
-                btnAdd.Text = "Save"; // Change button text for editing
+                btnAdd.Text = "Save"; 
             }
         }
 
         public string VehicleType => txtType.Text;
         public string VehicleName => txtName.Text;
         public decimal PricePerHour => decimal.TryParse(txtPrice.Text, out var p) ? p : 0;
-        public string Status => txtStatus.Text;
+        public VehicleStatus Status => (VehicleStatus)txtStatus.SelectedItem;
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -53,7 +53,8 @@ namespace Vehicle_Rental_Management_System.Forms
                 _vehicle.model = VehicleName;
                 _vehicle.type = VehicleType;
                 _vehicle.price = (double)PricePerHour;
-       
+                _vehicle.status = Status;
+
             }
 
             DialogResult = DialogResult.OK;

@@ -7,6 +7,7 @@ using Vehicle_Rental_Management_System.Interfaces;
 using Vehicle_Rental_Management_System.Helpers;
 using System.Data;
 using Vehicle_Rental_Management_System.Repositories;
+using Vehicle_Rental_Management_System.Models;
 
 namespace Vehicle_Rental_Management_System.Components
 {
@@ -14,6 +15,7 @@ namespace Vehicle_Rental_Management_System.Components
     {
 
         CustomerRepository customerRepository=new CustomerRepository();
+        BookingRepository bookingRepository=new BookingRepository();
 
         public string Title => "Customer Management";
 
@@ -39,18 +41,17 @@ namespace Vehicle_Rental_Management_System.Components
         {
             DataTable table = new DataTable();
 
-            // Define proper data types
             table.Columns.Add("CustomerId", typeof(int));
             table.Columns.Add("firstName", typeof(string));
             table.Columns.Add("lastName", typeof(string));
             table.Columns.Add("Nationality", typeof(string));
             table.Columns.Add("phone", typeof(string));
 
-            customerRepository.customerInit();
+            bookingRepository.Init();
 
-            foreach (var customer in customerRepository.customers )
+            foreach (var cus in bookingRepository.GetAll())
             {
-                table.Rows.Add(customer.Id,customer.FirstName,customer.LastName,customer.Nationality,customer.PhoneNumber);
+                table.Rows.Add(cus.Id, cus.Customer.FirstName, cus.Customer.LastName, cus.Customer.Nationality, cus.Customer.PhoneNumber);
             }
 
             return table;

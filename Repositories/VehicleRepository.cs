@@ -13,11 +13,11 @@ namespace Vehicle_Rental_Management_System.Repositories
             if (vehicles.Count > 0) return;
 
             vehicles.Add(
-              new Vehicle(3, "MS", "ssdf", 12, 3)
+              new Vehicle(1,"SUV", "High Lander", 12, VehicleStatus.Available)
             );
 
             vehicles.Add(
-              new Vehicle(2,"MS","ssdf",12,3)
+              new Vehicle(2,"Sedan","Mcedes Benz",12, VehicleStatus.Available)
             );
         }
 

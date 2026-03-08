@@ -63,8 +63,13 @@ namespace Vehicle_Rental_Management_System.Components
                 if (form.ShowDialog(owner) == DialogResult.OK)
                 {
                     int nextId = vehicleRepository.GetNextId();
-                   Vehicle vehicle= new Vehicle(nextId, form.VehicleType, form.VehicleName, (double)form.PricePerHour,2);
-                   
+                    var vehicle = new Vehicle(
+                        nextId,
+                        form.VehicleName,
+                        form.VehicleType,
+                        (double)form.PricePerHour,
+                        VehicleStatus.Available
+                    );
                     vehicleRepository.Add(vehicle);
                 }
             }

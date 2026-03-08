@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using Vehicle_Rental_Management_System.Forms;
 using Vehicle_Rental_Management_System.Helpers;
 using Vehicle_Rental_Management_System.Interfaces;
 using Vehicle_Rental_Management_System.Models;
@@ -13,21 +13,28 @@ namespace Vehicle_Rental_Management_System.Components
 {
     public class BookingManagementService : IManagementService
     {
-        
-        BookingRepository bookingRepository=new BookingRepository();
-
+        private readonly BookingRepository bookingRepository = new BookingRepository();
+        private readonly VehicleRepository vehicleRepository = new VehicleRepository();
 
         public string Title => "Booking Management";
 
         public bool CanAdd => true;
-
         public bool CanEdit => true;
-
         public bool CanDelete => true;
 
         public void DeleteRecord(object selectedId)
         {
-            MessageBox.Show($"Delete Customer ID: {selectedId}");
+            if (selectedId == null)
+            {
+                MessageBox.Show("Please select a booking to delete.");
+                return;
+            }
+
+            int id = Convert.ToInt32(selectedId);
+
+            bookingRepository.Delete(id);
+
+            MessageBox.Show($"Booking ID {id} deleted successfully.");
         }
 
         public List<ColumnDefinition> GetColumns()
@@ -36,11 +43,11 @@ namespace Vehicle_Rental_Management_System.Components
             {
                 new ColumnDefinition { HeaderText = "ID", DataPropertyName = "bookingId", Width = 60 },
                 new ColumnDefinition { HeaderText = "Customer", DataPropertyName = "customer", Width = 150 },
+                new ColumnDefinition { HeaderText = "Type", DataPropertyName = "type", Width = 120 },
                 new ColumnDefinition { HeaderText = "Vehicle", DataPropertyName = "vehicle", Width = 120 },
                 new ColumnDefinition { HeaderText = "Start Date", DataPropertyName = "startDate", Width = 120 },
-                new ColumnDefinition { HeaderText = "End Date", DataPropertyName = "EndDate", Width = 120 },
-                new ColumnDefinition { HeaderText = "Duration", DataPropertyName = "duration", Width = 120 },
-                new ColumnDefinition { HeaderText = "Payment Status", DataPropertyName = "paymentStatus", Width = 120 }
+                new ColumnDefinition { HeaderText = "End Date", DataPropertyName = "endDate", Width = 120 },
+                new ColumnDefinition { HeaderText = "Duration", DataPropertyName = "duration", Width = 80 }
             };
         }
 
@@ -48,48 +55,116 @@ namespace Vehicle_Rental_Management_System.Components
         {
             DataTable table = new DataTable();
 
-            table.Columns.Add("bookingId", typeof(string));
+            table.Columns.Add("bookingId", typeof(int));
             table.Columns.Add("customer", typeof(string));
+            table.Columns.Add("type", typeof(string));
             table.Columns.Add("vehicle", typeof(string));
-            table.Columns.Add("startDate", typeof(string));
-            table.Columns.Add("endDate", typeof(string));
+            table.Columns.Add("startDate", typeof(DateTime));
+            table.Columns.Add("endDate", typeof(DateTime));
             table.Columns.Add("duration", typeof(int));
-            table.Columns.Add("paymentStatus", typeof(string));
 
-            table.Rows.Add("B001", "John Doe", "Toyota Corolla", new DateTime(2026, 3, 1), new DateTime(2026, 3, 3), 2, "Paid");
-            //table.Rows.Add("B002", "Anna Smith", "Honda Civic", new DateTime(2026, 3, 2), new DateTime(2026, 3, 5), 3, "Pending");
-            //table.Rows.Add("B003", "David Kim", "Ford Ranger", new DateTime(2026, 3, 3), new DateTime(2026, 3, 6), 3, "Paid");
-            //table.Rows.Add("B004", "Sok Dara", "Honda Click", new DateTime(2026, 3, 4), new DateTime(2026, 3, 5), 1, "Pending");
-            //table.Rows.Add("B005", "Linda Chen", "Yamaha NMAX", new DateTime(2026, 3, 5), new DateTime(2026, 3, 8), 3, "Paid");
-            //table.Rows.Add("B006", "Michael Lee", "Toyota Hiace", new DateTime(2026, 3, 6), new DateTime(2026, 3, 10), 4, "Paid");
-            //table.Rows.Add("B007", "Chris Brown", "Toyota Fortuner", new DateTime(2026, 3, 7), new DateTime(2026, 3, 9), 2, "Pending");
-            //table.Rows.Add("B008", "Emily Davis", "Hyundai Tucson", new DateTime(2026, 3, 8), new DateTime(2026, 3, 11), 3, "Paid");
-            //table.Rows.Add("B009", "Kevin White", "Mazda 2", new DateTime(2026, 3, 9), new DateTime(2026, 3, 12), 3, "Pending");
-            //table.Rows.Add("B010", "Sophia Green", "BMW 3 Series", new DateTime(2026, 3, 10), new DateTime(2026, 3, 15), 5, "Paid");
+            bookingRepository.Init();
 
-
-            bookingRepository.bookingInit();
-
-            List<Booking> bookings = bookingRepository.bookings;
-            MessageBox.Show($"Loaded {bookings.Count} bookings from repository.");
+            List<Booking> bookings = BookingRepository.bookings;
 
             foreach (Booking booking in bookings)
             {
-            
-                table.Rows.Add(booking.Id, booking.Customer.FirstName, booking.Vehicle.model, booking.StartDate, booking.EndDate, (DateTime.Parse(booking.EndDate) - DateTime.Parse(booking.StartDate)).Days, booking.Payment.status);
+                table.Rows.Add(
+                    booking.Id,
+                    booking.Customer.FirstName + booking.Customer.LastName,
+                    booking.Vehicle.type,
+                    booking.Vehicle.model,
+                    booking.StartDate,
+                    booking.EndDate,
+                    booking.Duration
+                );
             }
-
             return table;
         }
 
         public void ShowAddDialog(IWin32Window owner)
         {
-            throw new NotImplementedException();
+            using (var form = new BookingDialog())
+            {
+                if (form.ShowDialog(owner) == DialogResult.OK)
+                {
+                    int nextId = bookingRepository.GetNextId();
+
+                    var customer = new Customer(
+                        nextId,
+                        form.FirstName,
+                        form.LastName,
+                        form.Nationality,
+                        form.Phone
+                    );
+                    
+                    Vehicle vehicle = vehicleRepository.GetByModel(form.VehicleModel);
+                    
+                    DateTime startDate = form.StartDate;
+                    DateTime endDate = form.EndDate;
+
+                    var payment = new Payment(
+                       nextId,
+                       vehicle.price * form.Duration,
+                       PaymentStatus.Pending
+                    );
+
+                    int duration = (endDate - startDate).Days;
+
+                    var booking = new Booking(
+                        nextId,
+                        customer,
+                        vehicle,
+                        payment,
+                        startDate,
+                        endDate,
+                        duration
+                    );
+
+                    bookingRepository.Add(booking);
+
+                    MessageBox.Show("Booking added successfully.");
+                }
+            }
         }
 
         public void ShowEditDialog(IWin32Window owner, object selectedId)
         {
-            throw new NotImplementedException();
+            if (selectedId == null)
+            {
+                MessageBox.Show("Please select a booking to edit.");
+                return;
+            }
+
+            int id = Convert.ToInt32(selectedId);
+
+            var booking = bookingRepository.GetById(id);
+
+            if (booking == null)
+            {
+                MessageBox.Show("Booking not found.");
+                return;
+            }
+
+            using (var form = new BookingDialog(booking))
+            {
+                if (form.ShowDialog(owner) == DialogResult.OK)
+                {
+                    booking.Customer.FirstName = form.FirstName;
+                    booking.Customer.LastName = form.LastName;
+                    booking.Customer.Nationality = form.Nationality;
+                    booking.Customer.PhoneNumber = form.Phone;
+
+                    booking.Vehicle.model = form.VehicleModel;
+
+                    booking.StartDate = form.StartDate;
+                    booking.EndDate = form.EndDate;
+                    booking.Duration = form.Duration;
+                    booking.Payment.Amount = form.Price;
+
+                    bookingRepository.Update(booking);
+                }
+            }
         }
     }
 }

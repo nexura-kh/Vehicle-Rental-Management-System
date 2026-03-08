@@ -8,17 +8,17 @@ namespace Vehicle_Rental_Management_System.Repositories
 {
     public class CustomerRepository
     {
-        public List<IPerson> customers = new List<IPerson>();
+        public static List<IPerson> customers = new List<IPerson>();
 
         public void customerInit()
         {
-         
-          
             customers.Add(new Customer(111, "Kong", "Ching", "Malaysia", "0123456789"));
             customers.Add(new Customer(222, "Kong", "Ching", "Malaysia", "0123456789"));
-
         }
-
+        public List<IPerson> GetAll()
+        {
+            return customers;
+        }
         public Customer getCustomerById(int id)
         {
             return customers.FirstOrDefault(c => c.Id == id) as Customer;
@@ -35,6 +35,15 @@ namespace Vehicle_Rental_Management_System.Repositories
             //PersonCreator personCreator = new CustomerCreator();
             //IPerson newCustomer = personCreator.OrderPerson(id, firstName, lastName, nationality, phoneNumber);
             //customers.Add(newCustomer);
+        }
+
+        public void createCustomer(Customer customer)
+        {
+            if (GetCustomerById(customer.Id.ToString()) != null)
+            {
+                throw new InvalidOperationException($"Customer with ID '{customer.Id}' already exists.");
+            }
+            customers.Add(customer);
         }
 
         public IPerson GetCustomerById(string id)

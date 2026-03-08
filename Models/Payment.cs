@@ -10,16 +10,15 @@ namespace Vehicle_Rental_Management_System.Models
     {
 
         public int Id { get; set; }
-
         public double Amount { get; set; }
-
-        public PaymentStatus status { get; set; }
+        public PaymentStatus Status { get; set; }
         public DateTime PaymentDate { get; set; }
-        public Payment(int id, double amount, DateTime paymentDate)
+        public Payment(int id, double amount, PaymentStatus status)
         {
             Id = id;
             Amount = amount;
-            PaymentDate = paymentDate;
+            Status = status;
+            //PaymentDate = paymentDate;
         }
     }
 }
