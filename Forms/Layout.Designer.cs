@@ -192,7 +192,6 @@
             btnLogo.Size = new Size(242, 86);
             btnLogo.TabIndex = 1;
             btnLogo.UseVisualStyleBackColor = false;
-            btnLogo.Click += btnLogo_Click;
             // 
             // panel1
             // 

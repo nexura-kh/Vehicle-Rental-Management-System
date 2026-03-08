@@ -17,14 +17,7 @@ namespace Vehicle_Rental_Management_System.Forms
         public Layout()
         {
             InitializeComponent();
-            LoadDashboard();
-        }
-        private void LoadDashboard()
-        {
-            DashboardManagementService dashboard = new DashboardManagementService();
-            dashboard.Dock = DockStyle.Fill;
-            dynamicPanel.Controls.Clear();
-            dynamicPanel.Controls.Add(dashboard);
+            LoadFeature(new BookingManagementService());
         }
         private void LoadFeature(IManagementService service)
         {
@@ -39,10 +32,6 @@ namespace Vehicle_Rental_Management_System.Forms
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             LoadFeature(new CustomerManagementService());
-        }
-        private void btnLogo_Click(object sender, EventArgs e)
-        {
-            LoadDashboard();
         }
         private void btnVehicle_Click(object sender, EventArgs e)
         {

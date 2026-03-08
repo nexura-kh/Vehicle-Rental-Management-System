@@ -57,7 +57,7 @@ namespace Vehicle_Rental_Management_System.Components
             _service.ShowAddDialog(this);
             LoadData();
         }
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click_1(object sender, EventArgs e)
         {
             if (dgvData.SelectedRows.Count == 0)
             {
@@ -69,7 +69,7 @@ namespace Vehicle_Rental_Management_System.Components
             _service.DeleteRecord(id);
             LoadData();
         }
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void btnEdit_Click_1(object sender, EventArgs e)
         {
             if (dgvData.SelectedRows.Count == 0)
             {
@@ -82,6 +82,5 @@ namespace Vehicle_Rental_Management_System.Components
             _service.ShowEditDialog(this, id);
             LoadData();
         }
-
     }
 }

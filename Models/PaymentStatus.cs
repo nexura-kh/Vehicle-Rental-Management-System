@@ -9,7 +9,6 @@ namespace Vehicle_Rental_Management_System.Models
     public enum PaymentStatus
     {
         Pending,
-        Confirmed,
-        Completed
+        Paid
     }
 }

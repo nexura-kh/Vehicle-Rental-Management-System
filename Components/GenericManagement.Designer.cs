@@ -34,8 +34,8 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
-            btnDelete = new Button();
             btnEdit = new Button();
+            btnDelete = new Button();
             btnAdd = new Button();
             lblTitle = new Label();
             panel1 = new Panel();
@@ -69,8 +69,8 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.Controls.Add(btnDelete, 2, 0);
-            tableLayoutPanel3.Controls.Add(btnEdit, 1, 0);
+            tableLayoutPanel3.Controls.Add(btnEdit, 2, 0);
+            tableLayoutPanel3.Controls.Add(btnDelete, 1, 0);
             tableLayoutPanel3.Controls.Add(btnAdd, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(605, 10);
@@ -81,25 +81,6 @@
             tableLayoutPanel3.Size = new Size(430, 56);
             tableLayoutPanel3.TabIndex = 0;
             // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.FromArgb(254, 226, 226);
-            btnDelete.Dock = DockStyle.Fill;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDelete.ForeColor = Color.FromArgb(185, 28, 28);
-            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
-            btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDelete.Location = new Point(296, 3);
-            btnDelete.Margin = new Padding(10, 3, 10, 3);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Padding = new Padding(30, 0, 0, 0);
-            btnDelete.Size = new Size(124, 50);
-            btnDelete.TabIndex = 3;
-            btnDelete.Text = "    Delete";
-            btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Click += btnDelete_Click;
-            // 
             // btnEdit
             // 
             btnEdit.BackColor = Color.FromArgb(224, 242, 241);
@@ -109,15 +90,34 @@
             btnEdit.ForeColor = Color.FromArgb(15, 118, 110);
             btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
             btnEdit.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEdit.Location = new Point(153, 3);
+            btnEdit.Location = new Point(296, 3);
             btnEdit.Margin = new Padding(10, 3, 10, 3);
             btnEdit.Name = "btnEdit";
             btnEdit.Padding = new Padding(30, 0, 0, 0);
-            btnEdit.Size = new Size(123, 50);
-            btnEdit.TabIndex = 2;
+            btnEdit.Size = new Size(124, 50);
+            btnEdit.TabIndex = 5;
             btnEdit.Text = "    Edit";
             btnEdit.UseVisualStyleBackColor = false;
-            btnEdit.Click += btnEdit_Click;
+            btnEdit.Click += btnEdit_Click_1;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.FromArgb(254, 226, 226);
+            btnDelete.Dock = DockStyle.Fill;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDelete.ForeColor = Color.FromArgb(185, 28, 28);
+            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
+            btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDelete.Location = new Point(153, 3);
+            btnDelete.Margin = new Padding(10, 3, 10, 3);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Padding = new Padding(30, 0, 0, 0);
+            btnDelete.Size = new Size(123, 50);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "    Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click_1;
             // 
             // btnAdd
             // 
@@ -224,11 +224,11 @@
 
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
-        private Button btnDelete;
-        private Button btnEdit;
         private Button btnAdd;
         private Label lblTitle;
         private Panel panel1;
         private DataGridView dgvData;
+        private Button btnEdit;
+        private Button btnDelete;
     }
 }

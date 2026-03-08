@@ -18,7 +18,6 @@ namespace Vehicle_Rental_Management_System.Models
             Id = id;
             Amount = amount;
             Status = status;
-            //PaymentDate = paymentDate;
         }
     }
 }
