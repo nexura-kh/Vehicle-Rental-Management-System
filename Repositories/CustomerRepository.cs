@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vehicle_Rental_Management_System.Interfaces;
+using Vehicle_Rental_Management_System.Models;
 
 namespace Vehicle_Rental_Management_System.Repositories
 {
@@ -12,10 +13,15 @@ namespace Vehicle_Rental_Management_System.Repositories
         public void customerInit()
         {
          
-            ////PersonCreator personCreator = new CustomerCreator();
-            //customers.Add(personCreator.OrderPerson("1", "Kong", "Chan", "Khmer", "019283"));
-            //customers.Add(personCreator.OrderPerson("2", "Tola", "Lala", "Khmer", "093282"));
-            //customers.Add(personCreator.OrderPerson("3", "Khim", "Heng", "Khmer", "039292"));
+          
+            customers.Add(new Customer(111, "Kong", "Ching", "Malaysia", "0123456789"));
+            customers.Add(new Customer(222, "Kong", "Ching", "Malaysia", "0123456789"));
+
+        }
+
+        public Customer getCustomerById(int id)
+        {
+            return customers.FirstOrDefault(c => c.Id == id) as Customer;
         }
 
         public void createCustomer(string id, string firstName, string lastName,

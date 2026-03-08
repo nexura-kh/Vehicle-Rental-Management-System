@@ -6,11 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Vehicle_Rental_Management_System.Helpers;
 using Vehicle_Rental_Management_System.Interfaces;
+using Vehicle_Rental_Management_System.Models;
+using Vehicle_Rental_Management_System.Repositories;
 
 namespace Vehicle_Rental_Management_System.Components
 {
     public class BookingManagementService : IManagementService
     {
+        
+        BookingRepository bookingRepository=new BookingRepository();
+
+
         public string Title => "Booking Management";
 
         public bool CanAdd => true;
@@ -45,21 +51,33 @@ namespace Vehicle_Rental_Management_System.Components
             table.Columns.Add("bookingId", typeof(string));
             table.Columns.Add("customer", typeof(string));
             table.Columns.Add("vehicle", typeof(string));
-            table.Columns.Add("startDate", typeof(DateTime));
-            table.Columns.Add("endDate", typeof(DateTime));
+            table.Columns.Add("startDate", typeof(string));
+            table.Columns.Add("endDate", typeof(string));
             table.Columns.Add("duration", typeof(int));
             table.Columns.Add("paymentStatus", typeof(string));
 
             table.Rows.Add("B001", "John Doe", "Toyota Corolla", new DateTime(2026, 3, 1), new DateTime(2026, 3, 3), 2, "Paid");
-            table.Rows.Add("B002", "Anna Smith", "Honda Civic", new DateTime(2026, 3, 2), new DateTime(2026, 3, 5), 3, "Pending");
-            table.Rows.Add("B003", "David Kim", "Ford Ranger", new DateTime(2026, 3, 3), new DateTime(2026, 3, 6), 3, "Paid");
-            table.Rows.Add("B004", "Sok Dara", "Honda Click", new DateTime(2026, 3, 4), new DateTime(2026, 3, 5), 1, "Pending");
-            table.Rows.Add("B005", "Linda Chen", "Yamaha NMAX", new DateTime(2026, 3, 5), new DateTime(2026, 3, 8), 3, "Paid");
-            table.Rows.Add("B006", "Michael Lee", "Toyota Hiace", new DateTime(2026, 3, 6), new DateTime(2026, 3, 10), 4, "Paid");
-            table.Rows.Add("B007", "Chris Brown", "Toyota Fortuner", new DateTime(2026, 3, 7), new DateTime(2026, 3, 9), 2, "Pending");
-            table.Rows.Add("B008", "Emily Davis", "Hyundai Tucson", new DateTime(2026, 3, 8), new DateTime(2026, 3, 11), 3, "Paid");
-            table.Rows.Add("B009", "Kevin White", "Mazda 2", new DateTime(2026, 3, 9), new DateTime(2026, 3, 12), 3, "Pending");
-            table.Rows.Add("B010", "Sophia Green", "BMW 3 Series", new DateTime(2026, 3, 10), new DateTime(2026, 3, 15), 5, "Paid");
+            //table.Rows.Add("B002", "Anna Smith", "Honda Civic", new DateTime(2026, 3, 2), new DateTime(2026, 3, 5), 3, "Pending");
+            //table.Rows.Add("B003", "David Kim", "Ford Ranger", new DateTime(2026, 3, 3), new DateTime(2026, 3, 6), 3, "Paid");
+            //table.Rows.Add("B004", "Sok Dara", "Honda Click", new DateTime(2026, 3, 4), new DateTime(2026, 3, 5), 1, "Pending");
+            //table.Rows.Add("B005", "Linda Chen", "Yamaha NMAX", new DateTime(2026, 3, 5), new DateTime(2026, 3, 8), 3, "Paid");
+            //table.Rows.Add("B006", "Michael Lee", "Toyota Hiace", new DateTime(2026, 3, 6), new DateTime(2026, 3, 10), 4, "Paid");
+            //table.Rows.Add("B007", "Chris Brown", "Toyota Fortuner", new DateTime(2026, 3, 7), new DateTime(2026, 3, 9), 2, "Pending");
+            //table.Rows.Add("B008", "Emily Davis", "Hyundai Tucson", new DateTime(2026, 3, 8), new DateTime(2026, 3, 11), 3, "Paid");
+            //table.Rows.Add("B009", "Kevin White", "Mazda 2", new DateTime(2026, 3, 9), new DateTime(2026, 3, 12), 3, "Pending");
+            //table.Rows.Add("B010", "Sophia Green", "BMW 3 Series", new DateTime(2026, 3, 10), new DateTime(2026, 3, 15), 5, "Paid");
+
+
+            bookingRepository.bookingInit();
+
+            List<Booking> bookings = bookingRepository.bookings;
+            MessageBox.Show($"Loaded {bookings.Count} bookings from repository.");
+
+            foreach (Booking booking in bookings)
+            {
+            
+                table.Rows.Add(booking.Id, booking.Customer.FirstName, booking.Vehicle.model, booking.StartDate, booking.EndDate, (DateTime.Parse(booking.EndDate) - DateTime.Parse(booking.StartDate)).Days, booking.Payment.status);
+            }
 
             return table;
         }

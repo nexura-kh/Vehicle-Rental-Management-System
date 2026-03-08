@@ -25,7 +25,6 @@ namespace Vehicle_Rental_Management_System.Forms
                 txtName.Text = _vehicle.model;
                 txtType.Text = _vehicle.type;
                 txtPrice.Text = _vehicle.price.ToString();
-                txtStatus.Text = _vehicle.status;
                 btnAdd.Text = "Save"; // Change button text for editing
             }
         }
@@ -54,7 +53,7 @@ namespace Vehicle_Rental_Management_System.Forms
                 _vehicle.model = VehicleName;
                 _vehicle.type = VehicleType;
                 _vehicle.price = (double)PricePerHour;
-                _vehicle.status = Status;
+       
             }
 
             DialogResult = DialogResult.OK;

@@ -12,23 +12,13 @@ namespace Vehicle_Rental_Management_System.Repositories
         {
             if (vehicles.Count > 0) return;
 
-            vehicles.Add(new Vehicle
-            {
-                id = 1,
-                type = "SUV",
-                model = "Toyota Highlander",
-                price = 25,
-                status = "Available"
-            });
+            vehicles.Add(
+              new Vehicle(3, "MS", "ssdf", 12, 3)
+            );
 
-            vehicles.Add(new Vehicle
-            {
-                id = 2,
-                type = "Sedan",
-                model = "Honda Civic",
-                price = 18,
-                status = "Available"
-            });
+            vehicles.Add(
+              new Vehicle(2,"MS","ssdf",12,3)
+            );
         }
 
         public List<Vehicle> GetAll()
@@ -39,6 +29,11 @@ namespace Vehicle_Rental_Management_System.Repositories
         public static Vehicle GetById(int id)
         {
             return vehicles.FirstOrDefault(v => v.id == id);
+        }
+
+        public Vehicle GetByModel(string model)
+        {
+            return vehicles.FirstOrDefault(v => v.model == model);
         }
 
         public int GetNextId()

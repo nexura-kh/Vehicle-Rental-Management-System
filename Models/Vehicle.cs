@@ -12,7 +12,30 @@ namespace Vehicle_Rental_Management_System.Models
         public int id { get; set; }
         public string model { get; set; }
         public string type { get; set; }
-        public string status { get; set; }
+        public VehicleStatus status { get; set; }
         public double price { get; set; }
+
+       public int duration;
+
+         
+        public Vehicle( int id,string model,string type,double price,int duration ) { 
+
+
+                this.id = id;
+                this.model = model;
+                this.type = type;
+                this.price = price;
+                this.duration = duration;
+                this.status = VehicleStatus.Available;
+
+        }
+
+        public double CalculateRentalCost()
+        {
+            return price * duration;
+        }
+
+
+
     }
 }
